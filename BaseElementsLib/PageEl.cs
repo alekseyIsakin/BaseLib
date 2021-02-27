@@ -7,17 +7,15 @@ namespace BaseLib
 {
     public class PageEl : AbstrPageEl
     {
-
-        public override byte GetTypeEl()
-        { return ID; }
-
         public byte X { get; private set; }
         public byte Y { get; private set; }
 
+        public override byte GetTypeEl()
+        { return ID; }
+        public override string GetNameEl()
+        { return Name; }
         public PageEl() 
-        {
-            X = 0; Y = 0;
-        }
+        { X = 0; Y = 0; }
 
         public PageEl(byte x, byte y)
         {

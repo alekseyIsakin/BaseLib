@@ -7,10 +7,12 @@ namespace BaseLib
 {
     public class PageClear : AbstrPageEl
     {
-        public const byte ID = 127;
+        public new const byte ID = 127;
+        public new const string Name = "PageClear";
         public override byte GetTypeEl()
         { return ID; }
-
+        public override string GetNameEl()
+        { return Name; }
         public override List<byte> GenSendData()
         {
             List<byte> arrOut = new List<byte>();
