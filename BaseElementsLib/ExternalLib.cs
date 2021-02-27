@@ -6,36 +6,28 @@ using System.Text;
 namespace BaseLib
 {
     public delegate AbstrPageEl BaseConstruct();
-    public delegate AbstrPageEl BaseUIConstruct(AbstrUIBase);
-    public delegate System.Xml.XmlNode BaseXMLLoader(AbstrPageEl);
-    public delegate AbstrPageEl BaseXMLWriter(System.Xml.XmlDocument, System.Xml.XmlElement);
+    public delegate AbstrUIBase BaseUIConstruct(AbstrPageEl abstrUIBase);
+    public delegate AbstrPageEl BaseXMLLoader(System.Xml.XmlNode xmlNode);
+    public delegate System.Xml.XmlElement BaseXMLWriter(AbstrPageEl abstrPageEl, System.Xml.XmlDocument xmlDocument);
 
-    public class ExternalLib 
+    public sealed class ExternalLib
     {
-        protected List<ExternalLibData> listELD = new List<ExternalLibData>();
-
-        public virtual List<ExternalLibData> getListElements()
-        { return listELD; }
-    }
-
-    public sealed class ExternalLibData
-    {
-        public readonly int id;
-        public readonly string name;
+        public readonly int ID;
+        public readonly string Name;
         public readonly BaseConstruct Construct;
         public readonly BaseUIConstruct UIConstruct;
         public readonly BaseXMLLoader XMLLoader;
         public readonly BaseXMLWriter XMLWriter;
         
-        public ExternalLibData(int id, string name, 
+        public ExternalLib(int id, string name, 
             BaseConstruct construct,
             BaseUIConstruct uiConstruct,
             BaseXMLLoader xmlLoader,
             BaseXMLWriter xmlWriter)
            
         {
-            this.id = id;
-            this.name = name;
+            this.ID = id;
+            this.Name = name;
             this.Construct = construct;
             this.UIConstruct = uiConstruct;
             this.XMLLoader = xmlLoader;
