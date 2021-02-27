@@ -5,35 +5,33 @@ using System.Text;
 
 namespace BaseLib
 {
-    public class ExternalLib 
-    {
-        protected List<ExternalLibData> listELD = new List<ExternalLibData>();
+    public delegate AbstrPageEl BaseConstruct();
+    public delegate AbstrUIBase BaseUIConstruct(AbstrPageEl abstrUIBase);
+    public delegate AbstrPageEl BaseXMLLoader(System.Xml.XmlNode xmlNode);
+    public delegate System.Xml.XmlElement BaseXMLWriter(AbstrPageEl abstrPageEl, System.Xml.XmlDocument xmlDocument);
 
-        public virtual List<ExternalLibData> getListElements()
-        { return listELD; }
-    }
-
-    public sealed class ExternalLibData
+    public sealed class ExternalLib
     {
-        public readonly int id;
-        public readonly string name;
-        public readonly Func<AbstrPageEl> BaseConstruct;
-        public readonly Func<AbstrPageEl, AbstrUIBase> BaseUIConstruct;
-        public readonly Func<System.Xml.XmlNode, AbstrPageEl> XMLLoader;
-        public readonly Func<AbstrPageEl, System.Xml.XmlDocument, System.Xml.XmlElement> XMLWriter;
+        public readonly int ID;
+        public readonly string Name;
+        public readonly BaseConstruct Construct;
+        public readonly BaseUIConstruct UIConstruct;
+        public readonly BaseXMLLoader XMLLoader;
+        public readonly BaseXMLWriter XMLWriter;
         
-        public ExternalLibData(int id, string name,
-            Func<AbstrPageEl> BaseConstruct,
-            Func<AbstrPageEl, AbstrUIBase> BaseUIConstruct,
-            Func<System.Xml.XmlNode, AbstrPageEl> XMLLoader,
-            Func<AbstrPageEl, System.Xml.XmlDocument, System.Xml.XmlElement> XMLWriter)
+        public ExternalLib(int id, string name, 
+            BaseConstruct construct,
+            BaseUIConstruct uiConstruct,
+            BaseXMLLoader xmlLoader,
+            BaseXMLWriter xmlWriter)
+           
         {
-            this.id = id;
-            this.name = name;
-            this.BaseConstruct = BaseConstruct;
-            this.BaseUIConstruct = BaseUIConstruct;
-            this.XMLLoader = XMLLoader;
-            this.XMLWriter = XMLWriter;
+            this.ID = id;
+            this.Name = name;
+            this.Construct = construct;
+            this.UIConstruct = uiConstruct;
+            this.XMLLoader = xmlLoader;
+            this.XMLWriter = xmlWriter;
         }
     }
 }
